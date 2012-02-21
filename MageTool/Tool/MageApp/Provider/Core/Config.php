@@ -62,6 +62,11 @@ class MageTool_Tool_MageApp_Provider_Core_Config extends MageTool_Tool_MageApp_P
      **/
     public function set($path, $value, $scope = null)
     {
+        /**
+         * @var $config Mage_Core_Model_Config
+         * @var $itemConfig Mage_Core_Model_Config_Data
+         * @var $configCollection Mage_Core_Model_Resource_Config_Data_Collection
+         */
         $this->_bootstrap();
         
         $this->_response->appendContent(
@@ -77,17 +82,37 @@ class MageTool_Tool_MageApp_Provider_Core_Config extends MageTool_Tool_MageApp_P
         }
         $configCollection->load();
             
-        foreach ($configCollection as $key => $config) {
-            $config->setValue($value);
+        if($configCollection->count()) {
+            foreach ($configCollection as $key => $config) {
+                $config->setValue($value);
+                if ($this->_registry->getRequest()->isPretend()) {
+                    $result = "Dry run";
+                } else {
+                    $result = "Saved";
+                    $config->save();
+                }
+
+                $this->_response->appendContent(
+                    "{$result} > {$config->getPath()} [{$config->getScope()}] = {$config->getValue()}",
+                    array('color' => array('white'))
+                );
+            }
+        } else {
+            $itemConfig = Mage::getModel('core/config_data');
+            $itemConfig->setData(array(
+                    'path'=>$path,
+                    'value'=>$value,
+                    'scope'=>$scope)
+            );
             if ($this->_registry->getRequest()->isPretend()) {
                 $result = "Dry run";
             } else {
-                $result = "Saved";
-                $config->save();
-            }  
+                $result = "Created";
+                $itemConfig->save();
+            }
 
             $this->_response->appendContent(
-                "{$result} > {$config->getPath()} [{$config->getScope()}] = {$config->getValue()}",
+                "{$result} > {$itemConfig->getPath()} [{$itemConfig->getScope()}] = {$itemConfig->getValue()}",
                 array('color' => array('white'))
             );
         }
