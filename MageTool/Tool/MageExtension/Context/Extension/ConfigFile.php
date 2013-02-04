@@ -72,11 +72,11 @@ class MageTool_Tool_MageExtension_Context_Extension_ConfigFile extends Zend_Tool
                 </setup>
             </{$xmlVendor}_{$xmlName}_setup>
         </resources>
+        <events></events>
     </global>
     <adminhtml>
     </adminhtml>
     <frontend>
-        <events></events>
         <routers></routers>
         <translate>
             <modules>
