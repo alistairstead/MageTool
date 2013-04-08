@@ -4,7 +4,7 @@ Feature: Cache
   I want a set of cache commands
 
   Scenario: list
-    When I run command "bin/mt list"
+    When I run command "./bin/mt list"
     Then I should see
     """
     cache
@@ -16,7 +16,7 @@ Feature: Cache
     """
 
   Scenario: cache:clear
-    Given I run command "bin/mt cache:clear"
+    Given I run command "./bin/mt cache:clear"
     Then I should see
     """
     Success! Cache cleared.

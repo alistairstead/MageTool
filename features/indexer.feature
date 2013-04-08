@@ -4,7 +4,7 @@ Feature: Indexer
   I want a set of index commands
 
   Scenario: list
-    When I run command "bin/mt list"
+    When I run command "./bin/mt list"
     Then I should see
     """
     indexer

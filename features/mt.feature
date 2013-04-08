@@ -4,14 +4,14 @@ Feature: Developer can interact quickly with Magento using command line tool Mag
   I want a simple command line tool that interacts with Magento
 
   Scenario: Command exists
-    When I run command "bin/mt"
+    When I run command "./bin/mt"
     Then I should see
     """
     MageTool
     """
 
   Scenario: version
-    When I run command "bin/mt --version"
+    When I run command "./bin/mt --version"
     Then I should see
     """
     MageTool version
