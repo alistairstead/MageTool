@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../src/bootstrap.php';
+
+use MageTool\Compiler;
+
+error_reporting(-1);
+ini_set('display_errors', 1);
+
+$compiler = new Compiler();
+$compiler->compile();
