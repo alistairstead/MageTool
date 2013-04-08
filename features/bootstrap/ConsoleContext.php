@@ -28,7 +28,7 @@ class ConsoleContext extends BehatContext
     {
         $this->process = new Process($commandString);
         if ($this->process->run() != 0) {
-            throw new \RuntimeException("Can't run $commandString" . $this->process->getOutput());
+            throw new \RuntimeException("Can't run $commandString" . $this->process->getErrorOutput());
         }
     }
 
