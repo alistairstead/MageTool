@@ -26,7 +26,7 @@ class PharContext extends BehatContext
             throw new \RuntimeException("Can't compile .phar update php.ini phar.readonly = false ");
         }
         if ($this->process->run() != 0) {
-            throw new \RuntimeException("Can't compile mt.phar " . $this->process->getOutput());
+            throw new \RuntimeException("Can't compile mt.phar " . $this->process->getErrorOutput());
         }
     }
 

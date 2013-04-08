@@ -15,7 +15,9 @@ before_script:
   - composer install --dev
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: ./bin/behat
+script:
+  - ./bin/behat
+  - ./bin/phpspec run
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
