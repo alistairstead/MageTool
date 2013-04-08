@@ -95,6 +95,7 @@ class Compiler
         $phar->addFromString($path, $content);
     }
 
+
     private function addBin($phar)
     {
         $content = file_get_contents(__DIR__.'/../../bin/mt');

@@ -10,14 +10,71 @@ use Symfony\Component\Console\Input\InputInterface;
 
 use MageTool\MageTool;
 use MageTool\Command;
+use MageTool\ServiceContainer;
 
 class Application extends BaseApplication
 {
+    private $container;
     /**
      * {@inheritdoc}
      */
     public function __construct()
     {
+        $this->container = $c = new ServiceContainer;
+
+        $c->set('console.commands', array());
+
+        // Cache
+        $c->extend('console.commands', function($c) {
+            return new Command\CacheClearCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\CacheDisableCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\CacheEnableCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\CacheFlushCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\CacheStatusCommand($c);
+        });
+        // Config
+        $c->extend('console.commands', function($c) {
+            return new Command\ConfigLintCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\ConfigReplaceCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\ConfigSetCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\ConfigShowCommand($c);
+        });
+        // Indexer
+        $c->extend('console.commands', function($c) {
+            return new Command\IndexerModeCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\IndexerRunCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\IndexerStatusCommand($c);
+        });
+        // Resource
+        $c->extend('console.commands', function($c) {
+            return new Command\ResourceDeleteCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\ResourceShowCommand($c);
+        });
+        $c->extend('console.commands', function($c) {
+            return new Command\ResourceUpdateCommand($c);
+        });
+
+
         parent::__construct('MageTool', MageTool::VERSION);
     }
 
@@ -27,11 +84,9 @@ class Application extends BaseApplication
     protected function getDefaultCommands()
     {
         $commands = parent::getDefaultCommands();
-        $commands[] = new Command\CacheClearCommand();
-        $commands[] = new Command\CacheDisableCommand();
-        $commands[] = new Command\CacheEnableCommand();
-        $commands[] = new Command\CacheFlushCommand();
-        $commands[] = new Command\CacheStatusCommand();
+        foreach ($this->container->get('console.commands') as $command) {
+            $commands[] = $command;
+        }
 
         return $commands;
     }

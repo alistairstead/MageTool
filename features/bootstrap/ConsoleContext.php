@@ -37,9 +37,8 @@ class ConsoleContext extends BehatContext
      */
     public function iShouldSee(PyStringNode $string)
     {
-        if (strpos($this->process->getOutput(), $string->getRaw()) === false)
-        {
-            throw new \RuntimeException("String $string->getRaw() not found in " . $this->process->getOutput());
+        if (strstr($this->process->getOutput(), (string) $string) === false) {
+            throw new \RuntimeException($string . "\n\n not found in \n\n" . $this->process->getOutput());
         }
     }
 }

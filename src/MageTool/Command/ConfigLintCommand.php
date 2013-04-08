@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Command\Command;
 
-class CacheEnableCommand extends Command
+class ConfigLintCommand extends Command
 {
     private $container;
 
@@ -27,19 +27,12 @@ class CacheEnableCommand extends Command
         $this->ignoreValidationErrors();
 
         $this
-            ->setName('cache:enable')
+            ->setName('config:lint')
             ->setDefinition(array())
-            ->setDescription('Enable Magento cache')
+            ->setDescription('Lint Magento xml config')
             ->setHelp(<<<EOF
-The <info>%command.name%</info> command displays help for a given command:
-
-    <info>php %command.full_name% list</info>
-
-You can also output the help as XML by using the <comment>--xml</comment> option:
-
-    <info>php %command.full_name% --xml list</info>
-
-To display the list of available commands, please use the <info>list</info> command.
+The <info>%command.name%</info> command will run lint tests against
+the xml configuration files.
 EOF
             )
         ;
