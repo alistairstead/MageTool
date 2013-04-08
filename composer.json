@@ -11,9 +11,6 @@
             "homepage": "http://www.designdisclosure.com"
         }
     ],
-    "autoload": {
-        "psr-0": { "": "src/" }
-    },
     "require": {
         "php": ">=5.3.2",
         "symfony/console": "2.1.*",
@@ -23,7 +20,7 @@
     "require-dev": {
         "behat/behat": "*",
         "phpspec/phpspec2": "*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "3.7.19"
     },
     "autoload": {
         "psr-0": {
