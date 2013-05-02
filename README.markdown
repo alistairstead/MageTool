@@ -34,7 +34,7 @@ Once you have installed ZF and MageTool you will need to create configuration fo
 	
 *** If you are upgrading from previous versions you will need to ensure you update the .zf.ini file. ***
 	
-After creating the user specific configuration file and adding the additional config lines the additional MageToll commands will be available for you to use with zf. To confirm that everything is installed correctly run the following command:
+After creating the user specific configuration file and adding the additional config lines the additional MageTool commands will be available for you to use with zf. To confirm that everything is installed correctly run the following command:
 
 	$ zf
 	
